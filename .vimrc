@@ -9,3 +9,10 @@ set hlsearch
 
 colorscheme  molokai
 
+"some row on the buttow
+set scrolloff=10
+
+syntax on
+
+"backspcae can not use. can use :help bs to watch document
+set backspace=
