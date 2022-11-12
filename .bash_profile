@@ -22,4 +22,4 @@ export XMODIFIERS=@im=fcitx5
 export SDL_IM_MODULE=fcitx5
 export GLFW_IM_MODULE=ibus
 
-export GREP_OPTIONS='--color=auto'
+alias grep='grep --color=always'
