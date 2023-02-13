@@ -8,6 +8,7 @@ export PATH=$PATH:/home/p/bin
 export PATH=$PATH:/home/p/usr/local
 export PATH=$PATH:/home/p/usr/local/bin
 export PATH=$PATH:/home/p/share
+export PATH=$PATH:/home/p/.local/bin
 
 
 export LC_CTYPE="zh_CN.UTF-8"
