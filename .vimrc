@@ -8,6 +8,8 @@ set relativenumber
 set scrolloff=10
 "backspcae can not use. can use :help bs to watch document
 set backspace=
+"auto change line
+set textwidth=80
 
 
 
@@ -31,3 +33,33 @@ set statusline+=%2*\ %f\ %*
 set statusline+=%=%3*\ %P\ %*
 set statusline+=%=%2*\ \[%l\,%c\]\ %*
 set statusline+=%=%1*\ \ \ \ \ %L\ \ \ \ \ %*
+
+
+call plug#begin()
+" Plugin outside ~/.vim/plugged with post-update hook
+"Plug '/usr/bin/fzf'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+" On-demand loading
+Plug 'preservim/nerdtree'
+
+"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+"Plug 'junegunn/vim-easy-align'
+" Any valid git URL is allowed
+"Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+" Multiple Plug commands can be written in a single line using | separators
+"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Using a non-default branch
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+"Plug 'fatih/vim-go', { 'tag': '*' }
+" Plugin options
+"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+" Unmanaged plugin (manually installed and updated)
+"Plug '~/my-prototype-plugin'
+" Initialize plugin system
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
