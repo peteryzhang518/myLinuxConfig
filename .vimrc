@@ -28,12 +28,17 @@ hi User3        ctermfg=234 ctermbg=121
 set laststatus=2
 "状态栏显示当前文件颜色为user1
 "%num*为用第几组颜色        \ 为空格        %%为字符百分号      %=为向左对齐
+"%*为向右对齐
 set statusline=%1*\ %{getcwd()}\ %*
 set statusline+=%2*\ %f\ %*
-set statusline+=%=%3*\ %P\ %*
-set statusline+=%=%2*\ \[%l\,%c\]\ %*
-set statusline+=%=%1*\ \ \ \ \ %L\ \ \ \ \ %*
+set statusline+=%=%3*\ %P\ 
+set statusline+=%2*\ \[%l\,%c\]\ 
+set statusline+=%1*\ \ \ \ \ %L\ \ \ \ \ 
 
+nnoremap fvf, ff
+nnoremap ff :Files<CR>
+nnoremap fvt, ft
+nnoremap fb :Buffers<CR>
 
 call plug#begin()
 " Plugin outside ~/.vim/plugged with post-update hook
