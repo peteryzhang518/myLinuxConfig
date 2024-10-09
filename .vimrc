@@ -47,6 +47,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 " On-demand loading
 Plug 'preservim/nerdtree'
+Plug 'mhinz/vim-startify'
 
 "Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 " The default plugin directory will be as follows:
