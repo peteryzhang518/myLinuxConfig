@@ -40,6 +40,7 @@ endif
 hi User1        ctermfg=234 ctermbg=191
 hi User2        ctermfg=234 ctermbg=156
 hi User3        ctermfg=234 ctermbg=121
+
 "状态栏
 set laststatus=2
 "状态栏显示当前文件颜色为user1
@@ -70,6 +71,7 @@ let Tlist_WinWidth=35
 "Nerdtree  config
 let g:NERDTreeWinPos='right'
 let g:NERDTreeWinSize=30
+
 "添加leader键位的映射
 let mapleader=" "
 map <Leader> <Plug>(easymotion-prefix)
@@ -97,7 +99,6 @@ let g:EasyMotion_re_anywhere = '\v' .
 " let g:EasyMotion_do_shade = 0
 " let g:EasyMotion_use_upper = 1
 " let g:EasyMotion_enter_jump_first = 1
-"
 " map  /         <Plug>(easymotion-sn)
 " omap /         <Plug>(easymotion-tn)
 " map  n         <Plug>(easymotion-next)
@@ -124,22 +125,15 @@ set rtp+=/home/p/.fzf/
 set rtp+=/home/p/.fzf/bin/
 set rtp+=/home/p/.fzf/bin/fzf
 set rtp+=~/.vim/plugin/
-"set rtp+=/usr/bin/fzf
-"set rtp+=/usr/bin/
-"set rtp+=/usr/
-"set rtp+=/usr/share/fzf
-"set rtp+=/usr/share/
-"set rtp+=/usr/
-"set rtp+=~/.fzf/bin/fzf
-"set rtp+=~/.fzf/bin/
 "let g:fzf_executable = '/usr/bin/fzf'
 
 "- Popup window(anchored to the bottom of the current window)
-"let g:fzf_layout = {'window':{'width':1, 'height':1, 'relative':v:true, 'yoffset':1.0}}
-"let $FZF_DEFAULT_OPTS='
-"    \--bind ctrl-d:half-page-down
-"    \--bind ctrl-u:half-page-ip
-"    \'
+let g:fzf_layout = {'window':{'width':1, 'height':1, 'relative':v:true, 'yoffset':1.0}}
+
+let $FZF_DEFAULT_OPTS='
+    \ --bind ctrl-d:half-page-down
+    \ --bind ctrl-u:half-page-up
+    \ '
 "   \--bind ctrl-d:up,ctrl-h:down'
 "   --bind ctrl-s:toggle-sort
 "   \--bind ctrl-e:preview-down
@@ -150,8 +144,7 @@ set rtp+=~/.vim/plugin/
 "添加fzf的快捷键映射
 nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>u :Buffers<CR>
-nnoremap <Leader>a :Ag <C-R><C-W><CR>
-
+nnoremap <Leader>r :Rg <C-R><C-W><CR>
 "添加调出一个终端的映射
 nnoremap <Leader>tt :bo ter ++rows=10<CR>
 
@@ -165,36 +158,14 @@ nnoremap <Leader>tt :bo ter ++rows=10<CR>
 "Plug '/usr/bin/fzf'
 "Plug 'junegunn/fzf'
 "Plug 'junegunn/fzf.vim'
+"vim-scripts/taglist.vim
 " On-demand loading
 "Plug 'preservim/nerdtree'
-
-"vim-scripts/taglist.vim
-"
-"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-" The default plugin directory will be as follows:
-"   - Vim (Linux/macOS): '~/.vim/plugged'
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-"Plug 'junegunn/vim-easy-align'
-" Any valid git URL is allowed
-"Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-" Multiple Plug commands can be written in a single line using | separators
-"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-" Using a non-default branch
-"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-"Plug 'fatih/vim-go', { 'tag': '*' }
-" Plugin options
-"Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-" Unmanaged plugin (manually installed and updated)
-"Plug '~/my-prototype-plugin'
-" Initialize plugin system
-" - Automatically executes `filetype plugin indent on` and `syntax enable`.
 "call plug#end()
 
 " Grep配置
 "let Grep_Default_Filelist = '*.h *.c *.cpp *.cc *.s *.S *.mk'
 "let Grep_Default_Options = '-w'
-
 
 " cscope配置
 "set cscopeverbose   " 提示已加载数据库
@@ -247,25 +218,21 @@ nnoremap <Leader>tt :bo ter ++rows=10<CR>
 " [1] Vim实用技巧. 人民邮电出版社.
 " [2]vim折叠设置(http://www.cnblogs.com/welkinwalker/archive/2011/05/30/2063587.html)
 " [3]vim可以查看最近编辑过的文件吗(https://zhidao.baidu.com/question/488525856.html)
-"
 
 
 " touchFish.vim
 let g:statuLineState = 0
 let g:fishTxtLineNum = 0
 
-
 function! GetData(arg1)
     return g:data[a:arg1]
 endfunction
-
 
 function! SaveFish()
     let g:data = readfile('/home/ts/fish.txt')
 "    echom GetData(g:fishTxtLineNum)
 endfunction
 command! PZSaveFish call SaveFish()
-
 
 function! NextFish()
 "    echom g:statuLineState
@@ -284,7 +251,6 @@ function! NextFish()
 endfunction
 command! PZNextFish call NextFish()
 
-
 function! LastFish()
     if g:statuLineState == 1
         if g:fishTxtLineNum > 0
@@ -300,7 +266,6 @@ function! LastFish()
 "    echom g:fishTxtLineNum 
 endfunction
 command! PZLastFish call LastFish()
-
 
 function! ChangeFish()
     if g:statuLineState == 0
