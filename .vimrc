@@ -153,15 +153,15 @@ nnoremap <Leader>tt :bo ter ++rows=10<CR>
 "autocmd BufWinEnter	* call fzf#vim#files() 
 "'command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(expand("<cword>")), 1, s:p(<bang>0), <bang>0)' ,
 
-"call plug#begin()
-" Plugin outside ~/.vim/plugged with post-update hook
-"Plug '/usr/bin/fzf'
-"Plug 'junegunn/fzf'
-"Plug 'junegunn/fzf.vim'
-"vim-scripts/taglist.vim
-" On-demand loading
-"Plug 'preservim/nerdtree'
-"call plug#end()
+call plug#begin()
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'https://github.com/lifepillar/vim-solarized8'
+Plug 'https://github.com/yegappan/taglist'
+Plug 'https://github.com/preservim/nerdtree'
+Plug 'https://github.com/easymotion/vim-easymotion'
+Plug 'https://github.com/tpope/vim-fugitive'
+call plug#end()
 
 " Grep配置
 "let Grep_Default_Filelist = '*.h *.c *.cpp *.cc *.s *.S *.mk'
