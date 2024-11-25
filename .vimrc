@@ -58,14 +58,15 @@ set statusline+=%1*\ \ \ \ \ %L\ \ \ \ \
 set updatetime=1000
 let Tlist_Ctags_Cmd="/usr/bin/ctags"
 set tags=./.tags;,.tags
-set autochdir
+"set autochdir
 
 let Tlist_Auto_Open=1
 let Tlist_Show_Menu=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Show_One_File=1
 let Tlist_Use_Right_Window=0
-let Tlist_WinWidth=35
+"let Tlist_WinWidth=35
+let Tlist_WinWidth=50
 "let Tlist_GainFocus_On_ToggleOpen=1
 
 "Nerdtree  config
@@ -118,13 +119,16 @@ cnoremap <c-h> <left>
 cnoremap <c-l> <right>
 
 "fzf
-source ~/.fzf/plugin/fzf.vim
+"source ~/.fzf/plugin/fzf.vim
 set rtp+=~/.fzf
 set rtp+=~/.fzf/bin/
 set rtp+=/home/p/.fzf/
 set rtp+=/home/p/.fzf/bin/
 set rtp+=/home/p/.fzf/bin/fzf
 set rtp+=~/.vim/plugin/
+set rtp+=~/.vim/plugin/
+set rtp+=/usr/bin/
+set rtp+=/usr/bin/fzf
 "let g:fzf_executable = '/usr/bin/fzf'
 
 "- Popup window(anchored to the bottom of the current window)
@@ -147,6 +151,9 @@ nnoremap <Leader>u :Buffers<CR>
 nnoremap <Leader>r :Rg <C-R><C-W><CR>
 "添加调出一个终端的映射
 nnoremap <Leader>tt :bo ter ++rows=10<CR>
+
+nnoremap <Leader>o :only \| set nonumber norelativenumber noshowmode noshowcmd noruler laststatus=0 signcolumn=no<CR>
+nnoremap <Leader>O :set number relativenumber showmode showcmd ruler laststatus=2 signcolumn=yes<CR>
 
 ":autocmd VimEnter * :Files<CR>
 "autocmd BufEnter * call fzf#vim#files() 
