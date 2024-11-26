@@ -132,7 +132,10 @@ set rtp+=/usr/bin/fzf
 "let g:fzf_executable = '/usr/bin/fzf'
 
 "- Popup window(anchored to the bottom of the current window)
-let g:fzf_layout = {'window':{'width':1, 'height':1, 'relative':v:true, 'yoffset':1.0}}
+"let g:fzf_vim.preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
+let g:fzf_vim                     = {}
+let g:fzf_vim.preview_window      = [ 'hidden,right,50%', 'ctrl-\' ]
+let g:fzf_layout = {'window':{'width':1, 'height':1, 'relative':v:false, 'yoffset':1.0}}
 
 let $FZF_DEFAULT_OPTS='
     \ --bind ctrl-d:half-page-down
