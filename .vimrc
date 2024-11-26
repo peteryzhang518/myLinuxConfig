@@ -153,7 +153,10 @@ nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>u :Buffers<CR>
 nnoremap <Leader>r :Rg <C-R><C-W><CR>
 "添加调出一个终端的映射
-nnoremap <Leader>tt :bo ter ++rows=10<CR>
+nnoremap <Leader>tt :bo ter ++rows=10 <CR>
+tnoremap <Esc> <C-\><C-N>
+" 自动将终端工作目录设置为当前工作目录
+"autocmd TerminalOpen * execute 'cd ' . getcwd()
 
 nnoremap <Leader>o :only \| set nonumber norelativenumber noshowmode noshowcmd noruler laststatus=0 signcolumn=no<CR>
 nnoremap <Leader>O :set number relativenumber showmode showcmd ruler laststatus=2 signcolumn=yes<CR>
