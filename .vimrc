@@ -156,15 +156,16 @@ nnoremap <Leader>r :Rg <C-R><C-W><CR>
 nnoremap <Leader>tt :bo ter ++rows=10 <CR>
 tnoremap <Esc> <C-\><C-N>
 " 自动将终端工作目录设置为当前工作目录
-"autocmd TerminalOpen * execute 'cd ' . getcwd()
+" terminal-autoshelldir
+def g:Tapi_lcd(_, path: string)
+    echo isdirectory(path)
+    if isdirectory(path)
+        execute 'silent lcd ' .. fnameescape(path)
+    endif
+enddef
 
 nnoremap <Leader>o :only \| set nonumber norelativenumber noshowmode noshowcmd noruler laststatus=0 signcolumn=no<CR>
 nnoremap <Leader>O :set number relativenumber showmode showcmd ruler laststatus=2 signcolumn=yes<CR>
-
-":autocmd VimEnter * :Files<CR>
-"autocmd BufEnter * call fzf#vim#files() 
-"autocmd BufWinEnter	* call fzf#vim#files() 
-"'command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(expand("<cword>")), 1, s:p(<bang>0), <bang>0)' ,
 
 call plug#begin()
 Plug 'junegunn/fzf'
