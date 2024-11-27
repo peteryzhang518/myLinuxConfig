@@ -152,20 +152,52 @@ let $FZF_DEFAULT_OPTS='
 nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>u :Buffers<CR>
 nnoremap <Leader>r :Rg <C-R><C-W><CR>
+nnoremap <Leader>o :only \| set nonumber norelativenumber noshowmode noshowcmd noruler laststatus=0 signcolumn=no<CR>
+nnoremap <Leader>O :set number relativenumber showmode showcmd ruler laststatus=2 signcolumn=yes<CR>
+
 "添加调出一个终端的映射
-nnoremap <Leader>tt :bo ter ++rows=10 <CR>
+"nnoremap <Leader>tt :bo ter<CR>
+nnoremap <Leader>tt :bo ter ++rows=100 <CR>
 tnoremap <Esc> <C-\><C-N>
 " 自动将终端工作目录设置为当前工作目录
 " terminal-autoshelldir
 def g:Tapi_lcd(_, path: string)
-    echo isdirectory(path)
     if isdirectory(path)
         execute 'silent lcd ' .. fnameescape(path)
     endif
 enddef
 
-nnoremap <Leader>o :only \| set nonumber norelativenumber noshowmode noshowcmd noruler laststatus=0 signcolumn=no<CR>
-nnoremap <Leader>O :set number relativenumber showmode showcmd ruler laststatus=2 signcolumn=yes<CR>
+"let buf = bufnr('term://*')  " 获取当前终端缓冲区号
+"let [rows, cols] = term_getsize(buf)
+"echo 'Rows: ' . rows . ', Columns: ' . cols
+
+"autocmd TerminalOpen * call SetTerminalMaxSize()
+"
+"function! SetTerminalMaxSize()
+"        " 获取第一个缓冲区号
+"    let first_buf = getbufinfo(1)[0].bufnr
+"    echom 'First buffer: ' . first_buf
+"
+"    let size = term_getsize(first_buf)
+"    echom 'size: ' . size
+""    " 获取当前缓冲区号
+""    let first_buf = bufnr(buflist()[0])
+""    echom 'First buffer: ' . first_buf
+""
+""    "let buf = bufnr('%')
+""    " 获取终端的行数和列数
+""    let size = term_getsize(first_buf)
+""    "let size = term_getsize(buf)
+""    " 确保返回的 size 列表包含行数和列数
+"    if len(size) == 2
+"        let rows = size[0]
+"        let cols = size[1]
+"        execute 'set termwinsize=' . l:rows . 'x' . l:cols
+"        echom 'Terminal size: ' . rows . 'x' . cols
+"    else
+"        echom 'Failed to get terminal size'
+"    endif
+"endfunction
 
 call plug#begin()
 Plug 'junegunn/fzf'
