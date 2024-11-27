@@ -24,32 +24,6 @@ set is
 set hlsearch
 "syntax on
 syntax enable
-set bg=dark
-"set background=dark
-"colorscheme  molokai
-let g:solarized_termcolors=256
-
-" 开启 256 色支持 t_Co即terminal Color
-"set t_Co=256
-" 开启真彩色支持（Neovim 或 Vim 8 以上版本支持）
-if has("termguicolors")
-  set termguicolors
-endif
-"颜色信息的书写方式 hi name cterm=* ctermfg=* ctermbg=* gui=* guifg=* guibg=* 
-hi User1        ctermfg=234 ctermbg=191
-hi User2        ctermfg=234 ctermbg=156
-hi User3        ctermfg=234 ctermbg=121
-
-"状态栏
-set laststatus=2
-"状态栏显示当前文件颜色为user1
-"%num*为用第几组颜色        \ 为空格        %%为字符百分号      %=为向左对齐
-"%*为向右对齐
-set statusline=%1*\ %{getcwd()}\ %*
-set statusline+=%2*\ %f\ %*
-set statusline+=%=%3*\ %P\ 
-set statusline+=%2*\ \[%l\,%c\]\ 
-set statusline+=%1*\ \ \ \ \ %L\ \ \ \ \ 
 
 "添加ctag的配置
 "set tags+=~/.vim/linux-4.6.4-tags
@@ -123,14 +97,45 @@ nnoremap <Leader>O :set number relativenumber showmode showcmd ruler laststatus=
 nnoremap <Leader>tt :terminal <CR>
 tnoremap <Esc> <C-\><C-N>
 
+" vim-fugitive
+command! GlogFullScreen :botright new | Glog
+
 call plug#begin()
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/lifepillar/vim-solarized8'
+Plug 'https://github.com/altercation/vim-colors-solarized'
 Plug 'https://github.com/yegappan/taglist'
 Plug 'https://github.com/preservim/nerdtree'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/tpope/vim-fugitive'
 call plug#end()
 
-colorscheme solarized8
+"set bg=dark
+set background=dark
+"colorscheme  molokai
+colorscheme solarized
+"colorscheme solarized8
+let g:solarized_termcolors=256
+
+" 开启 256 色支持 t_Co即terminal Color
+"set t_Co=256
+" 开启真彩色支持（Neovim 或 Vim 8 以上版本支持）
+"if has("termguicolors")
+"  set termguicolors
+"endif
+"颜色信息的书写方式 hi name cterm=* ctermfg=* ctermbg=* gui=* guifg=* guibg=* 
+hi User1        ctermfg=234 ctermbg=191
+hi User2        ctermfg=234 ctermbg=156
+hi User3        ctermfg=234 ctermbg=121
+
+"状态栏
+set laststatus=2
+"状态栏显示当前文件颜色为user1
+"%num*为用第几组颜色        \ 为空格        %%为字符百分号      %=为向左对齐
+"%*为向右对齐
+set statusline=%1*\ %{getcwd()}\ %*
+set statusline+=%2*\ %f\ %*
+set statusline+=%=%3*\ %P\ 
+set statusline+=%2*\ \[%l\,%c\]\ 
+set statusline+=%1*\ \ \ \ \ %L\ \ \ \ \ 
