@@ -157,7 +157,8 @@ nnoremap <Leader>O :set number relativenumber showmode showcmd ruler laststatus=
 
 "添加调出一个终端的映射
 "nnoremap <Leader>tt :bo ter<CR>
-nnoremap <Leader>tt :bo ter ++rows=100 <CR>
+nnoremap <Leader>tt :bo ter ++curwin<CR>
+"nnoremap <Leader>tt :bo ter ++rows=100 <CR>
 tnoremap <Esc> <C-\><C-N>
 " 自动将终端工作目录设置为当前工作目录
 " terminal-autoshelldir

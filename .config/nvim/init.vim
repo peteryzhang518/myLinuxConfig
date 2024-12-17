@@ -39,7 +39,7 @@ let Tlist_Exit_OnlyWindow=1
 let Tlist_Show_One_File=1
 let Tlist_Use_Right_Window=0
 "let Tlist_WinWidth=35
-let Tlist_WinWidth=50
+let Tlist_WinWidth=45
 "let Tlist_GainFocus_On_ToggleOpen=1
 
 "Nerdtree  config
