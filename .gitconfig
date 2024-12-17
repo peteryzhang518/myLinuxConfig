@@ -1,0 +1,9 @@
+[user]
+	email = zhangyan9151@boe.com.cn
+	name = zhangyan9151
+[color]
+	ui = auto
+[core]
+	editor = vim
+[http]
+	postBuffer = 524288000
