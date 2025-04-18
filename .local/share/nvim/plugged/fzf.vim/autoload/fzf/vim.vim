@@ -340,6 +340,10 @@ function! s:fzf(name, opts, extra)
   let eopts  = has_key(extra, 'options') ? remove(extra, 'options') : ''
   let merged = extend(copy(a:opts), extra)
   call s:merge_opts(merged, eopts)
+
+  " Command-level fzf options
+  call s:merge_opts(merged, s:conf(a:name.'_options', []))
+
   return fzf#run(s:wrap(a:name, merged, bang))
 endfunction
 
@@ -455,7 +459,7 @@ function! fzf#vim#files(dir, ...)
     let dir = s:shortpath()
   endif
 
-  let args.options = ['-m', '--prompt', strwidth(dir) < &columns / 2 - 20 ? dir : '> ']
+  let args.options = ['--scheme', 'path', '-m', '--prompt', strwidth(dir) < &columns / 2 - 20 ? dir : '> ']
   call s:merge_opts(args, s:conf('files_options', []))
   return s:fzf('files', args, a:000)
 endfunction
@@ -711,8 +715,11 @@ endfunction
 " ------------------------------------------------------------------
 
 function! s:get_git_root(dir)
+  if empty(a:dir) && exists('*FugitiveWorkTree')
+    return FugitiveWorkTree()
+  endif
   let dir = len(a:dir) ? a:dir : substitute(split(expand('%:p:h'), '[/\\]\.git\([/\\]\|$\)')[0], '^fugitive://', '', '')
-  let root = systemlist('git -C ' . fzf#shellescape(dir) . ' rev-parse --show-toplevel')[0]
+  let root = systemlist('git -C ' . shellescape(dir) . ' rev-parse --show-toplevel')[0]
   return v:shell_error ? '' : (len(a:dir) ? fnamemodify(a:dir, ':p') : root)
 endfunction
 
@@ -748,7 +755,7 @@ function! fzf#vim#gitfiles(args, ...)
     return s:fzf('gfiles', {
     \ 'source':  source,
     \ 'dir':     root,
-    \ 'options': '-m --read0 --prompt "GitFiles> "'
+    \ 'options': '--scheme path -m --read0 --prompt "GitFiles> "'
     \}, a:000)
   endif
 
@@ -766,7 +773,7 @@ function! fzf#vim#gitfiles(args, ...)
   let wrapped = fzf#wrap({
   \ 'source':  prefix . '-c color.status=always status --short --untracked-files=all',
   \ 'dir':     root,
-  \ 'options': ['--ansi', '--multi', '--nth', '2..,..', '--tiebreak=index', '--prompt', 'GitFiles?> ', '--preview', preview]
+  \ 'options': ['--scheme', 'path', '--ansi', '--multi', '--nth', '2..,..', '--tiebreak=index', '--prompt', 'GitFiles?> ', '--preview', preview]
   \})
   call s:remove_layout(wrapped)
   let wrapped.common_sink = remove(wrapped, 'sink*')
@@ -856,7 +863,7 @@ function! fzf#vim#buffers(...)
   return s:fzf('buffers', {
   \ 'source':  map(sorted, 'fzf#vim#_format_buffer(v:val)'),
   \ 'sink*':   s:function('s:bufopen'),
-  \ 'options': ['+m', '-x', '--tiebreak=index', header_lines, '--ansi', '-d', '\t', '--with-nth', '3..', '-n', '2,1..2', '--prompt', 'Buf> ', '--query', query, '--preview-window', '+{2}-/2', '--tabstop', tabstop]
+  \ 'options': ['+m', '-x', '--tiebreak=index', header_lines, '--ansi', '-d', '\t', '--with-nth', '3..', '-n', '2,1..2', '--prompt', 'Buf> ', '--query', query, '--preview-window', '+{2}/2', '--tabstop', tabstop]
   \}, args)
 endfunction
 
@@ -965,7 +972,7 @@ function! fzf#vim#grep(grep_command, ...)
   let opts = {
   \ 'options': ['--ansi', '--prompt', capname.'> ',
   \             '--multi', '--bind', 'alt-a:select-all,alt-d:deselect-all',
-  \             '--delimiter', ':', '--preview-window', '+{2}-/2']
+  \             '--delimiter', ':', '--preview-window', '+{2}/2']
   \}
   if len(args) && type(args[0]) == s:TYPE.bool
     call remove(args, 0)
@@ -1005,7 +1012,7 @@ function! fzf#vim#grep2(command_prefix, query, ...)
   \ 'options': ['--ansi', '--prompt', toupper(name).'> ', '--query', a:query,
   \             '--disabled',
   \             '--multi', '--bind', 'alt-a:select-all,alt-d:deselect-all',
-  \             '--delimiter', ':', '--preview-window', '+{2}-/2']
+  \             '--delimiter', ':', '--preview-window', '+{2}/2']
   \}
 
   let [opts, suffix] = s:grep_multi_line(opts)
@@ -1082,7 +1089,7 @@ function! fzf#vim#buffer_tags(query, ...)
     return s:fzf('btags', {
     \ 'source':  s:btags_source(tag_cmds),
     \ 'sink*':   s:function('s:btags_sink'),
-    \ 'options': s:reverse_list(['-m', '-d', '\t', '--with-nth', '1,4..', '-n', '1', '--prompt', 'BTags> ', '--query', a:query, '--preview-window', '+{3}-/2'])}, args)
+    \ 'options': s:reverse_list(['-m', '-d', '\t', '--with-nth', '1,4..', '-n', '1', '--prompt', 'BTags> ', '--query', a:query, '--preview-window', '+{3}/2'])}, args)
   catch
     return s:warn(v:exception)
   endtry
@@ -1415,7 +1422,7 @@ function! fzf#vim#jumps(...)
   return s:fzf('jumps', {
   \ 'source'  : map(s:jumplist, 's:jump_format(v:val)'),
   \ 'sink*'   : s:function('s:jump_sink'),
-  \ 'options' : ['+m', '-x', '--ansi', '--tiebreak=index', '--cycle', '--scroll-off=999', '--sync', '--bind', 'start:pos('.current.')+offset-middle', '--tac', '--tiebreak=begin', '--prompt', 'Jumps> ', '--preview-window', '+{3}-/2', '--tabstop=2', '--delimiter', '[:\s]+'],
+  \ 'options' : ['+m', '-x', '--ansi', '--tiebreak=index', '--cycle', '--scroll-off=999', '--sync', '--bind', 'start:pos('.current.')+offset-middle', '--tac', '--tiebreak=begin', '--prompt', 'Jumps> ', '--preview-window', '+{3}/2', '--tabstop=2', '--delimiter', '[:\s]+'],
   \ }, a:000)
 endfunction
 
