@@ -3,6 +3,7 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
+set showmatch
 set number
 set relativenumber
 "some row on the buttow
@@ -57,7 +58,7 @@ set statusline+=%1*\ \ \ \ \ %L\ \ \ \ \
 "nmap <silent> <F4> :tselect <c-r><c-w><cr>
 set updatetime=1000
 let Tlist_Ctags_Cmd="/usr/bin/ctags"
-set tags=./.tags;,.tags
+set tags=./tags;./.tags;.tags
 "set autochdir
 
 let Tlist_Auto_Open=1
@@ -201,6 +202,14 @@ enddef
 "endfunction
 
 call plug#begin()
+"快速注释
+"markdown 显示
+"文本对奇
+"自动表格
+"显示修改历史
+"自动格式和文档
+"显示当前行的 git 状态
+
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'https://github.com/lifepillar/vim-solarized8'
@@ -208,6 +217,7 @@ Plug 'https://github.com/yegappan/taglist'
 Plug 'https://github.com/preservim/nerdtree'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/tpope/vim-fugitive'
+Plug 'https://github.com/Yggdroot/indentLine'
 call plug#end()
 
 " Grep配置
@@ -341,4 +351,3 @@ function! ChangeFish()
     endif
 endfunction
 command! PZChangeFish call ChangeFish()
-nnoremap <Leader>c :PZChangeFish<CR>
